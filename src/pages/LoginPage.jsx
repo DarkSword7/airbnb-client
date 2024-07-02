@@ -1,18 +1,41 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function loginUser(e) {
+    e.preventDefault();
+
+    try {
+      await axios.post("/login", {
+        email,
+        password,
+      });
+      toast.success("Logged in successfully");
+    } catch (error) {
+      toast.error("Failed to login, try again later");
+    }
+  }
   return (
     <div className="mt-4 grow flex items-center justify-around">
       <div className="mb-64">
         <h1 className="text-4xl text-center mb-4">Login</h1>
-        <form className="max-w-md mx-auto">
+        <form className="max-w-md mx-auto" onSubmit={loginUser}>
           <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full border my-1 py-2 px-3 rounded-2xl"
             type="email"
             placeholder="your@email.com"
           />
 
           <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full border my-1 py-2 px-3 rounded-2xl"
             type="password"
             placeholder="password"
