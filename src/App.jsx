@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import IndexPage from "./pages/IndexPage";
 import Layout from "./Layout";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
