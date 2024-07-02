@@ -1,15 +1,26 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function registerUser(e) {
+  async function registerUser(e) {
     e.preventDefault();
-    axios.get("/");
+    try {
+      await axios.post("/register", {
+        name,
+        email,
+        password,
+      });
+
+      toast.success("User registered successfully");
+    } catch (error) {
+      toast.error("Failed to register user, try again later");
+    }
   }
 
   return (
@@ -44,7 +55,7 @@ const RegisterPage = () => {
           <div className="py-2 text-center text-gray-500">
             Already have an account?{" "}
             <Link className="underline text-primary" to={"/login"}>
-              Register now
+              Login
             </Link>
           </div>
         </form>
