@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   async function loginUser(e) {
     e.preventDefault();
@@ -30,9 +30,6 @@ const LoginPage = () => {
     return <Navigate to={"/"} />;
   }
 
-  if (user) {
-    return <Navigate to={"/"} />;
-  }
   return (
     <div className="mt-4 grow flex items-center justify-around">
       <div className="mb-64">
