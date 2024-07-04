@@ -7,7 +7,7 @@ import { UserContext } from "../UserContext";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  const [redirect, setRedirect] = useState(null);
   const { setUser } = useContext(UserContext);
 
   async function loginUser(e) {
@@ -19,15 +19,15 @@ const LoginPage = () => {
         password,
       });
       setUser(data);
+      setRedirect("/");
       toast.success("Logged in successfully");
-      setRedirect(true);
     } catch (error) {
       toast.error("Failed to login, try again later");
     }
   }
 
   if (redirect) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={redirect} />;
   }
 
   return (
