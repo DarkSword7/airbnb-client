@@ -31,14 +31,12 @@ const RegisterPage = () => {
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border my-1 py-2 px-3 rounded-2xl"
             type="text"
             placeholder="Full Name"
           />
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border my-1 py-2 px-3 rounded-2xl"
             type="email"
             placeholder="your@email.com"
           />
@@ -46,7 +44,6 @@ const RegisterPage = () => {
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border my-1 py-2 px-3 rounded-2xl"
             type="password"
             placeholder="password"
           />
