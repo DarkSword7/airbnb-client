@@ -53,9 +53,9 @@ const PlacesFormPage = () => {
     );
   }
 
-  async function addNewPlace(e) {
+  async function savePlace(e) {
     e.preventDefault();
-    await axios.post("/add-place", {
+    const placeData = {
       title,
       address,
       addedPhotos,
@@ -65,8 +65,20 @@ const PlacesFormPage = () => {
       checkIn,
       checkOut,
       maxGuests,
-    });
-    setRedirect(true);
+    };
+
+    if (id) {
+      // Update
+      await axios.put("/places", {
+        id,
+        ...placeData,
+      });
+      setRedirect(true);
+    } else {
+      // Create
+      await axios.post("/add-place", placeData);
+      setRedirect(true);
+    }
   }
 
   if (redirect) {
@@ -77,7 +89,7 @@ const PlacesFormPage = () => {
     <div>
       <AccountNav />
       <h1 className="text-4xl mt-4">Add a new accommodation</h1>
-      <form onSubmit={addNewPlace}>
+      <form onSubmit={savePlace}>
         {preInput("Title", "for example: Cozy apartment in the city center")}
         <input
           value={title}
