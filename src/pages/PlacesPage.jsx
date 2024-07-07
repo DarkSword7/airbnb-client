@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
 import AccountNav from "../AccountNav";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const PlacesPage = () => {
+  const [places, setPlaces] = useState([]);
+  useEffect(() => {
+    axios.get("/places").then(({ data }) => {
+      setPlaces(data);
+    });
+  }, []);
+
   return (
     <>
       <AccountNav />
       <div className="text-center">
-        list of all added places
-        <br />
         <Link
           to="/account/places/new"
           className="inline-flex gap-1 bg-primary text-white py-2 px-6 rounded-full mt-4"
@@ -28,6 +35,36 @@ const PlacesPage = () => {
           </svg>
           Add a new accommodation
         </Link>
+      </div>
+      <div className="mt-4">
+        {places.length > 0 ? (
+          places.map((place) => (
+            <Link
+              to={`/account/places/${place._id}`}
+              key={place._id}
+              className="flex cursor-pointer gap-4 border-b bg-gray-100 p-4 rounded-2xl"
+            >
+              <div className="w-32 h-32 bg-gray-200 grow shrink-0">
+                {place.photos.length > 0 && (
+                  <img
+                    src={`http://localhost:3000/uploads/${place.photos[0]}`}
+                    alt={place.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+              <div className="grow-0 shrink">
+                <h2 className="text-xl">{place.title}</h2>
+                <p>{place.address}</p>
+                <p className="text-sm mt-2">
+                  {place.description.slice(0, 200)}...
+                </p>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <p className="text-center mt-4">You have no accommodations yet.</p>
+        )}
       </div>
     </>
   );
