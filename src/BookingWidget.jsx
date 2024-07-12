@@ -1,4 +1,42 @@
+import { useState } from "react";
+import { differenceInDays } from "date-fns";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 const BookingWidget = ({ place }) => {
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [numGuests, setNumGuests] = useState(1);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [redirect, setRedirect] = useState("");
+
+  let numberOfNights = 0;
+  if (checkIn && checkOut) {
+    numberOfNights = differenceInDays(new Date(checkOut), new Date(checkIn));
+  }
+
+  const bookThisPlace = async () => {
+    const response = await axios.post("/booking", {
+      place: place._id,
+      checkIn,
+      checkOut,
+      numGuests,
+      name,
+      phone,
+      price: numberOfNights * place.price,
+    });
+
+    const bookingId = response.data._id;
+    setRedirect(`/account/bookings/${bookingId}`);
+    toast.success("Booking successful");
+  };
+
+  if (redirect) {
+    return <Navigate to={redirect} />;
+  }
+
   return (
     <div className="bg-white shadow p-4 rounded-2xl">
       <div className="text-2xl text-center">
@@ -8,19 +46,56 @@ const BookingWidget = ({ place }) => {
         <div className="flex">
           <div className="py-3 px-4">
             <label>Check-in</label>
-            <input type="date" />
+            <input
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)}
+              type="date"
+            />
           </div>
           <div className="py-3 px-4 border-l">
             <label>Check-out</label>
-            <input type="date" />
+            <input
+              value={checkOut}
+              onChange={(e) => setCheckOut(e.target.value)}
+              type="date"
+            />
           </div>
         </div>
         <div className="py-3 px-4 border-t">
           <label>Number of guests:</label>
-          <input type="number" />
+          <input
+            value={numGuests}
+            onChange={(e) => setNumGuests(e.target.value)}
+            type="number"
+          />
         </div>
+        {numberOfNights > 0 && (
+          <>
+            <div className="py-3 px-4 border-t">
+              <label>Your full name:</label>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+              />
+              <label>Phone number:</label>
+              <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                type="tel"
+              />
+            </div>
+          </>
+        )}
       </div>
-      <button className="primary mt-4">Book now</button>
+      <button onClick={bookThisPlace} className="primary mt-4">
+        Book this place{" "}
+        {numberOfNights > 0 && (
+          <span>
+            for ${place.price * numberOfNights} ({numberOfNights} nights)
+          </span>
+        )}
+      </button>
     </div>
   );
 };
