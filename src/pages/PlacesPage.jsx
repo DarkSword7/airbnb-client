@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import AccountNav from "../AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import PlaceImg from "../PlaceImg";
 
 const PlacesPage = () => {
   const [places, setPlaces] = useState([]);
@@ -33,7 +34,7 @@ const PlacesPage = () => {
               d="M12 4.5v15m7.5-7.5h-15"
             />
           </svg>
-          Add a new accommodation
+          Add a new place
         </Link>
       </div>
       <div className="mt-4">
@@ -45,13 +46,7 @@ const PlacesPage = () => {
               className="flex cursor-pointer gap-4 border-b bg-gray-100 p-4 rounded-2xl"
             >
               <div className="flex w-32 h-32 bg-gray-200 grow shrink-0">
-                {place.photos.length > 0 && (
-                  <img
-                    src={`http://localhost:3000/uploads/${place.photos[0]}`}
-                    alt={place.title}
-                    className="w-full h-full object-cover"
-                  />
-                )}
+                <PlaceImg place={place} />
               </div>
               <div className="grow-0 shrink">
                 <h2 className="text-xl">{place.title}</h2>
