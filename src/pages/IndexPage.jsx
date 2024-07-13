@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const IndexPage = () => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const [places, setPlaces] = useState([]);
   useEffect(() => {
     axios.get("/places").then(({ data }) => {
@@ -18,7 +19,7 @@ const IndexPage = () => {
               {place.photos?.[0] && (
                 <img
                   className="rounded-2xl object-cover aspect-square"
-                  src={`http://localhost:3000/uploads/${place.photos?.[0]}`}
+                  src={`${baseUrl}/uploads/${place.photos?.[0]}`}
                   alt={place.title}
                 />
               )}

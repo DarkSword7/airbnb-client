@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 const PhotoUploader = ({ addedPhotos, onChange }) => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const [photoLink, setPhotoLink] = useState("");
   function inputHeader(text) {
     return <h2 className="text-2xl mt-4">{text}</h2>;
@@ -85,7 +86,7 @@ const PhotoUploader = ({ addedPhotos, onChange }) => {
             <div key={photo} className="h-32 flex relative">
               <img
                 className="rounded-2xl w-full object-cover"
-                src={"http://localhost:3000/uploads/" + photo}
+                src={`${baseUrl}/uploads/` + photo}
                 alt="uploaded"
               />
               <button

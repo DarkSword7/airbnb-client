@@ -1,4 +1,5 @@
 const PlaceImg = ({ place, index = 0, className = null }) => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   if (!place.photos?.length) {
     return <div className="aspect-square bg-gray-200"></div>;
   }
@@ -7,7 +8,7 @@ const PlaceImg = ({ place, index = 0, className = null }) => {
   }
   return (
     <img
-      src={`http://localhost:3000/uploads/${place.photos[index]}`}
+      src={`${baseUrl}/uploads/${place.photos[index]}`}
       alt={place.title}
       className={className}
     />

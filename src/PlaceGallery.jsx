@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { CgMenuGridO } from "react-icons/cg";
+
 const PlaceGallery = ({ place }) => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const [showAllPhotos, setShowAllPhotos] = useState(false);
 
   if (showAllPhotos) {
@@ -23,7 +25,7 @@ const PlaceGallery = ({ place }) => {
               return (
                 <div>
                   <img
-                    src={`http://localhost:3000/uploads/${photo}`}
+                    src={`${baseUrl}/uploads/${photo}`}
                     alt={place.title}
                     className="w-full"
                   />
@@ -43,7 +45,7 @@ const PlaceGallery = ({ place }) => {
             <div>
               <img
                 onClick={() => setShowAllPhotos(true)}
-                src={`http://localhost:3000/uploads/${place.photos[0]}`}
+                src={`${baseUrl}/uploads/${place.photos[0]}`}
                 alt={place.title}
                 className="aspect-square object-cover cursor-pointer"
               />
@@ -54,7 +56,7 @@ const PlaceGallery = ({ place }) => {
           {place.photos?.[1] && (
             <img
               onClick={() => setShowAllPhotos(true)}
-              src={`http://localhost:3000/uploads/${place.photos[1]}`}
+              src={`${baseUrl}/uploads/${place.photos[1]}`}
               alt={place.title}
               className="aspect-square object-cover cursor-pointer"
             />
@@ -64,7 +66,7 @@ const PlaceGallery = ({ place }) => {
             {place.photos?.[2] && (
               <img
                 onClick={() => setShowAllPhotos(true)}
-                src={`http://localhost:3000/uploads/${place.photos[2]}`}
+                src={`${baseUrl}/uploads/${place.photos[2]}`}
                 alt={place.title}
                 className="aspect-square object-cover cursor-pointer relative top-2"
               />
