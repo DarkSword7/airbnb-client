@@ -25,10 +25,10 @@ const BookingsPage = () => {
               key={booking._id}
               className="flex gap-4 bg-gray-100 rounded-2xl overflow-hidden shadow"
             >
-              <div className="w-48">
+              <div className="hidden sm:flex w-48">
                 <PlaceImg place={booking.place} />
               </div>
-              <div className="py-3 pr-3 grow">
+              <div className="py-3 px-3 grow">
                 <h2 className="text-xl">{booking.place.title}</h2>
                 <div className="text-xl">
                   <BookingDates

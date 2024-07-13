@@ -37,7 +37,7 @@ const PlacesPage = () => {
           Add a new place
         </Link>
       </div>
-      <div className="mt-4">
+      <div className="flex flex-col gap-2 mt-4">
         {places.length > 0 ? (
           places.map((place) => (
             <Link
