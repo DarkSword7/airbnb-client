@@ -46,18 +46,18 @@ const PlacePage = () => {
         <div className="bg-white -mx-8 px-8 py-8 border-t">
           <div>
             <h2 className="font-semibold text-2xl">Extra Info</h2>
-            {/* <div className="mt-2">
-          <iframe
-            title="map"
-            width="100%"
-            height="300"
-            frameBorder="0"
-            scrolling="no"
-            marginHeight="0"
-            marginWidth="0"
-            src={`https://maps.google.com/maps?q=${place.address}&output=embed`}
-          />
-        </div> */}
+            <div className="mt-2">
+              <iframe
+                title="map"
+                width="100%"
+                height="300"
+                frameBorder="0"
+                scrolling="no"
+                marginHeight="0"
+                marginWidth="0"
+                src={`https://maps.google.com/maps?q=${place.address}&output=embed`}
+              />
+            </div>
           </div>
           <div className="mb-4 mt-2 text-sm text-gray-700 leading-5">
             {place.extraInfo}
