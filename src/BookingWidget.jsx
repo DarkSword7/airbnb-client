@@ -51,17 +51,17 @@ const BookingWidget = ({ place }) => {
         Price: ${place.price} / per night
       </div>
       <div className="border rounded-2xl mt-4">
-        <div className="flex">
-          <div className="py-3 px-4">
-            <label>Check-in</label>
+        <div className="flex flex-wrap">
+          <div className="py-3 px-4 sm:w-1/2">
+            <label>Check-in: </label>
             <input
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
               type="date"
             />
           </div>
-          <div className="py-3 px-4 border-l">
-            <label>Check-out</label>
+          <div className="py-3 px-4 border-l sm:w-1/2">
+            <label>Check-out: </label>
             <input
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
