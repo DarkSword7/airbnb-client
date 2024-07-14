@@ -11,7 +11,7 @@ const PlaceGallery = ({ place }) => {
       <div className="absolute inset-0 bg-black text-white min-h-screen">
         <div className="bg-black p-8 grid gap-4">
           <div>
-            <h2 className="text-3xl mr-44">{place.title}</h2>
+            <h2 className="text-3xl mr-38">{place.title}</h2>
             <button
               onClick={() => setShowAllPhotos(false)}
               className="fixed flex right-12 top-8 items-center gap-1 py-2 px-4 bg-white text-black rounded-2xl shadow shadow-black/30"
